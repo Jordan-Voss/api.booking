@@ -15,7 +15,7 @@ public class HelloWorldController {
     private static final String template = "Hello, %s!";
     private final AtomicLong counter = new AtomicLong();
 
-    @CrossOrigin(origins = "http://localhost:8100")
+    @CrossOrigin(origins = "*")
     @GetMapping("/hello-world")
     @ResponseBody
     public Greeting sayHello(@RequestParam(name="name", required=false, defaultValue="World") String name) {
