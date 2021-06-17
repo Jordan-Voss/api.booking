@@ -15,6 +15,9 @@ public class User {
     @Column(name = "f_name")
     private String firstName;
 
+    @Column(name = "l_name")
+    private String lastName;
+
     @Column(name = "username")
     private String userName;
 
