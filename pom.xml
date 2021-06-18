@@ -37,6 +37,12 @@
 			<groupId>org.liquibase</groupId>
 			<artifactId>liquibase-core</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-extensions</artifactId>
+			<version>0.11.2</version>
+			<type>pom</type>
+		</dependency>
 
 		<dependency>
 			<groupId>mysql</groupId>
