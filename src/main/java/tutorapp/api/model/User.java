@@ -27,4 +27,7 @@ public class User {
     @Enumerated
     @Column(name = "role")
     private Role role;
+
+    @Transient
+    private String token;
 }
