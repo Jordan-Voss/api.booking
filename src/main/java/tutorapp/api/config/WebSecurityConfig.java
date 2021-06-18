@@ -12,6 +12,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import tutorapp.api.jwt.JWTAuthorizationFilter;
+import tutorapp.api.jwt.JwtTokenProvider;
 import tutorapp.api.service.UserDetailsServiceImpl;
 
 @Configuration
@@ -31,7 +33,6 @@ public class WebSecurityConfig  extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        //Cross-origin-resource-sharing: localhost:8080, localhost:4200(allow for it.)
         http.cors().and()
                 .authorizeRequests()
                 //These are public paths
@@ -41,23 +42,14 @@ public class WebSecurityConfig  extends WebSecurityConfigurerAdapter {
                 //All remaining paths should need authentication.
                 .anyRequest().fullyAuthenticated()
                 .and()
-                //logout will log the user out by invalidated session.
                 .logout().permitAll()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/api/user/logout", "POST"))
                 .and()
-                //login form and path
                 .formLogin().loginPage("/api/user/login").and()
-                //enable basic authentication
                 .httpBasic().and()
-                //We will handle it later.
-                //Cross side request forgery
                 .csrf().disable();
-
-        //jwt filter
         http.addFilter(new JWTAuthorizationFilter(authenticationManager(),jwtTokenProvider));
     }
-
-
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
