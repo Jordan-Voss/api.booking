@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import tutorapp.api.service.Greeting;
 
 @Controller
-public class HelloWorldController {
+public class HelloWorldController { 
 
     private static final String template = "Hello, %s!";
     private final AtomicLong counter = new AtomicLong();
