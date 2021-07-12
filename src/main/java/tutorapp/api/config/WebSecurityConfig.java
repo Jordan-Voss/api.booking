@@ -15,6 +15,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import tutorapp.api.security.jwt.AuthEntryPoint;
+import tutorapp.api.security.jwt.AuthTokenFilter;
+import tutorapp.api.security.service.UserDetailsServiceImpl;
+
+import javax.servlet.Filter;
 
 @Configuration
 @EnableWebSecurity
@@ -28,7 +33,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     UserDetailsServiceImpl userDetailsService;
 
     @Autowired
-    private AuthEntryPointJwt unauthorizedHandler;
+    private AuthEntryPoint unauthorizedHandler;
 
     @Bean
     public AuthTokenFilter authenticationJwtTokenFilter(){
@@ -47,7 +52,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public PasswordEncoder() {
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
