@@ -14,7 +14,7 @@ public class TestController {
     @GetMapping("/all")
     public String allAccess() {
         System.out.println("public");
-        return "Public Content";
+        return "Public Content123";
     }
 
     @GetMapping("/user")
