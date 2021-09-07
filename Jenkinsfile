@@ -8,7 +8,7 @@ agent any
           }
           stage('Test') {
               steps {
-                  echo 'Testing..'
+                  echo 'Starting Testing..'
               }
           }
           stage('Deploy') {
