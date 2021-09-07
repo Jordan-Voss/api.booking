@@ -8,6 +8,7 @@ agent any
           }
           stage('Build Docker Image') {
               steps {
+              sh 'ls'
                   sh 'docker buildx build --platform linux/arm/v7 -t api.booking .'
                   sh 'docker save --output api.tar api.booking:latest'
                   sh 'ls'
