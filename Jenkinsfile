@@ -1,3 +1,14 @@
+pipeline {
+    agent any
+    stages {
+        stage('build') {
+            steps {
+                echo "Hello World!"
+            }
+        }
+    }
+}
+
 // pipeline {
 // agent any
 //   stages {
@@ -25,29 +36,29 @@
 //           }
 //       }
 //   }
-node {
-    agent any
-        stage('Build') {
-            sh 'mvn clean install'
-
-            def pom = readMavenPom file:'pom.xml'
-            print pom.version
-            env.version = pom.version
-        }
-
-        stage('Image') {
-            dir ('account-service') {
-                def app = docker.build '''api:${env.version}'''
-                app.push()
-            }
-        }
-
-        stage ('Run') {
-            docker.image('''api:${env.version}''').run('''-p 2222:2222 -h api --name api --link discovery''')
-        }
-
-        stage ('Final') {
-            build job: 'customer-service-pipeline', wait: false
-        }
-    }
+// node {
+//     agent any
+//         stage('Build') {
+//             sh 'mvn clean install'
+//
+//             def pom = readMavenPom file:'pom.xml'
+//             print pom.version
+//             env.version = pom.version
+//         }
+//
+//         stage('Image') {
+//             dir ('account-service') {
+//                 def app = docker.build '''api:${env.version}'''
+//                 app.push()
+//             }
+//         }
+//
+//         stage ('Run') {
+//             docker.image('''api:${env.version}''').run('''-p 2222:2222 -h api --name api --link discovery''')
+//         }
+//
+//         stage ('Final') {
+//             build job: 'customer-service-pipeline', wait: false
+//         }
+//     }
 
