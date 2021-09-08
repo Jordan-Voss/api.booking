@@ -5,6 +5,9 @@ pipeline {
             steps {
                 echo "Hello World!"
                 sh 'docker version'
+                sh 'ls'
+                sh '''docker save --output booking.tar api.booking:latest'''
+                sh 'ls'
             }
         }
     }
