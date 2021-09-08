@@ -4,7 +4,7 @@ pipeline {
         stage('build') {
             steps {
                 echo "Hello World!"
-                ssh 'docker version'
+                sh 'docker version'
             }
         }
     }
