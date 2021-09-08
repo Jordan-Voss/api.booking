@@ -37,13 +37,13 @@ node {
 
         stage('Image') {
             dir ('account-service') {
-                def app = docker.build "api:${env.version}"
+                def app = docker.build '''api:${env.version}'''
                 app.push()
             }
         }
 
         stage ('Run') {
-            docker.image("api:${env.version}").run('-p 2222:2222 -h api --name api --link discovery')
+            docker.image('''api:${env.version}''').run('''-p 2222:2222 -h api --name api --link discovery''')
         }
 
         stage ('Final') {
