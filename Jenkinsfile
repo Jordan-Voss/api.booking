@@ -27,7 +27,7 @@
 //   }
 node {
 
-    withMaven(maven:'maven') {
+    agent any
 
         stage('Build') {
             sh 'mvn clean install'
