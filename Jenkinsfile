@@ -1,14 +1,14 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'maven:3.8.1-adoptopenjdk-11'
+            args '-v /root/.m2:/root/.m2'
+        }
+    }
     stages {
-        stage('build') {
+        stage('Build') {
             steps {
-                echo "Hello World!"
-                sh 'docker image ls'
-//                 sh '''docker system prune -a -f --volumes'''
-//                 sh '''docker image build -t api.booking .'''
-//                 sh 'docker image ls'
-//                 sh '''docker container run -p 1111:1111 api.booking'''
+                sh 'mvn -B -DskipTests clean package'
             }
         }
     }
