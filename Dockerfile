@@ -1,18 +1,33 @@
-FROM maven:3.5.2-jdk-8-alpine AS MAVEN_BUILD
+#    from jenkins/jenkins:lts
+#    USER root
+#    RUN apt-get update -qq \
+#        && apt-get install -qqy apt-transport-https ca-certificates curl gnupg2 software-properties-common
+#    RUN curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -
+#    RUN add-apt-repository \
+#       "deb [arch=amd64] https://download.docker.com/linux/debian \
+#       $(lsb_release -cs) \
+#       stable"
+#    RUN apt-get update  -qq \
+#        && apt-get install docker-ce=17.12.1~ce-0~debian -y
+#    RUN usermod -aG docker jenkins
 
 
-COPY pom.xml /build/
-COPY src /build/src/
 
-WORKDIR /build/
-RUN mvn package
-
-FROM openjdk:8-jre-alpine
-
-
-COPY --from=MAVEN_BUILD /build/target/booking-api-1.0-SNAPSHOT.jar /app/
-
-ENTRYPOINT ["java", "-jar", "booking-api-1.0-SNAPSHOT.jar"]
+#FROM maven:3.5.2-jdk-8-alpine AS MAVEN_BUILD
+#
+#
+#COPY pom.xml /build/
+#COPY src /build/src/
+#
+#WORKDIR /build/
+#RUN mvn package
+#
+#FROM openjdk:8-jre-alpine
+#
+#
+#COPY --from=MAVEN_BUILD /build/target/booking-api-1.0-SNAPSHOT.jar /app/
+#
+#ENTRYPOINT ["java", "-jar", "booking-api-1.0-SNAPSHOT.jar"]
 
 
 
