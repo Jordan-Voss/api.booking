@@ -1,10 +1,28 @@
-FROM openjdk:8-jdk-alpine
-VOLUME /tmp
-ADD target/api-0.0.1-SNAPSHOT.jar app.jar
+FROM maven:3.5.2-jdk-8-alpine AS MAVEN_BUILD
 
-ENTRYPOINT ["java","-jar","app.jar"]
+COPY pom.xml /build/
+COPY src /build/src/
 
-EXPOSE 8080
+WORKDIR /build/
+RUN mvn package
+
+FROM openjdk:8-jre-alpine
+
+WORKDIR /app
+
+COPY --from=MAVEN_BUILD /build/target/booking-api-1.0-SNAPSHOT.jar /app/
+
+ENTRYPOINT ["java", "-jar", "docker-boot-intro-0.1.0.jar"]
+
+
+
+#FROM openjdk:8-jdk-alpine
+#VOLUME /tmp
+#ADD target/api-0.0.1-SNAPSHOT.jar app.jar
+#
+#ENTRYPOINT ["java","-jar","app.jar"]
+#
+#EXPOSE 8080
 
 
 #FROM arm32v7/adoptopenjdk:11-jdk-hotspot
