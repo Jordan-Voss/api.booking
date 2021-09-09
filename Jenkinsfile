@@ -10,7 +10,7 @@ pipeline {
                 sh 'ls'
                 sh '''docker load -i booking.tar'''
                 sh 'docker image ls'
-                sh '''docker run -p 8080:8080 api.booking:latest'''
+                sh '''docker run -p 8081:8081 api.booking:latest'''
             }
         }
     }
