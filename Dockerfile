@@ -1,3 +1,13 @@
+# latest oracle openjdk is the basis
+#FROM openjdk:oracle
+## copy jar file into container image under app directory
+#COPY target/booking-api-1.0-SNAPSHOT.jar app/api.jar
+## expose server port accept connections
+#EXPOSE 8080
+## start application
+#CMD ["java", "-jar", "app/apiap.jar"]
+
+
 FROM arm32v7/adoptopenjdk:11-jdk-hotspot
 RUN addgroup spring
 RUN adduser spring --ingroup spring
