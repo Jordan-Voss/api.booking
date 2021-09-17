@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Entity
 @Table
@@ -16,10 +17,12 @@ public class Lesson {
     generator = "lesson_sequence")
     private Long id;
     private String subject;
-    private LocalDateTime startTime;
+    private LocalTime startTime;
+    private LocalDate startDate;
     private Duration duration;
     private LocalDate date;
     private LocalDateTime booked_on;
+    private Boolean available;
     private Long user_id;
 
     public Lesson() {
@@ -28,32 +31,40 @@ public class Lesson {
     public Lesson(
             Long id,
             String subject,
-            LocalDateTime startTime,
+            LocalTime startTime,
+            LocalDate startDate,
             Duration duration,
             LocalDate date,
             LocalDateTime booked_on,
+            Boolean available,
             Long user_id) {
         this.id = id;
         this.subject = subject;
         this.startTime = startTime;
+        this.startDate = startDate;
         this.duration = duration;
         this.date = date;
         this.booked_on = booked_on;
+        this.available = available;
         this.user_id = user_id;
     }
 
     public Lesson(
             String subject,
-            LocalDateTime startTime,
+            LocalTime startTime,
+            LocalDate startDate,
             Duration duration,
             LocalDate date,
             LocalDateTime booked_on,
+            Boolean available,
             Long user_id) {
         this.subject = subject;
         this.startTime = startTime;
+        this.startDate = startDate;
         this.duration = duration;
         this.date = date;
         this.booked_on = booked_on;
+        this.available = available;
         this.user_id = user_id;
     }
 
@@ -65,7 +76,7 @@ public class Lesson {
         return subject;
     }
 
-    public LocalDateTime getStartTime() {
+    public LocalTime getStartTime() {
         return startTime;
     }
 
@@ -85,6 +96,21 @@ public class Lesson {
         return user_id;
     }
 
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+    public void setAvailable(Boolean available) {
+        this.available = available;
+    }
+
+    public Boolean getAvailable() {
+        return available;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -93,7 +119,7 @@ public class Lesson {
         this.subject = subject;
     }
 
-    public void setStartTime(LocalDateTime startTime) {
+    public void setStartTime(LocalTime startTime) {
         this.startTime = startTime;
     }
 
@@ -119,9 +145,11 @@ public class Lesson {
                 "id=" + id +
                 ", subject='" + subject + '\'' +
                 ", startTime=" + startTime +
+                ", startDate=" + startDate +
                 ", duration=" + duration +
                 ", date=" + date +
                 ", booked_on=" + booked_on +
+                ", available=" + available +
                 ", user_id=" + user_id +
                 '}';
     }

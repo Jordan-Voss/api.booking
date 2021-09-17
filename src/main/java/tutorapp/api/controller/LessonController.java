@@ -1,17 +1,12 @@
 package tutorapp.api.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import tutorapp.api.models.Lesson;
 import tutorapp.api.service.LessonService;
 
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -25,8 +20,21 @@ public class LessonController {
     public LessonController(LessonService lessonService) {
         this.lessonService = lessonService;
     }
-    @GetMapping
-    public List<Lesson> getLessons() {
-        return lessonService.getLessons();
+
+//    @GetMapping
+//    public List<Lesson> getLessons() {
+//        return lessonService.getLessons();
+//    }
+
+    @GetMapping("/available")
+    public List<Lesson> getAvailableLessons(){
+        return lessonService.getAvailableLessons();
+    };
+
+    @PostMapping
+    public void bookNewLesson(@RequestBody Lesson lesson) {
+        lessonService.addLessonNew(lesson);
     }
+
+
 }
