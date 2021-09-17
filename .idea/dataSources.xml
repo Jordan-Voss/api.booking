@@ -7,5 +7,11 @@
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://localhost:5432/booking</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="booking@188.141.36.19" uuid="c9354400-cc00-4a87-a970-e949506c6ac9">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://188.141.36.19:5432/booking</jdbc-url>
+    </data-source>
   </component>
 </project>

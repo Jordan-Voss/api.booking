@@ -21,15 +21,19 @@ public class LessonController {
         this.lessonService = lessonService;
     }
 
-//    @GetMapping
-//    public List<Lesson> getLessons() {
-//        return lessonService.getLessons();
-//    }
-
     @GetMapping("/available")
     public List<Lesson> getAvailableLessons(){
         return lessonService.getAvailableLessons();
     };
+    
+    @PostMapping("/insert-available")
+    public void insertNewAvailableBooking(@RequestBody List<Lesson> lessons) {
+        for (Lesson lesson: lessons
+             ) {
+            lessonService.insertNewAvailableLesson(lesson);
+        }
+
+    }
 
     @PostMapping
     public void bookNewLesson(@RequestBody Lesson lesson) {

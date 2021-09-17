@@ -7,8 +7,10 @@ import tutorapp.api.models.Lesson;
 import tutorapp.api.repository.LessonRepository;
 
 import javax.transaction.Transactional;
+import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,8 +46,13 @@ public class LessonService {
     @Transactional
     public void makePastBookingUnavailable() {
 //        lessonRepository.updateByStartDateStartTime(LocalDate.now(), LocalTime.now());
-        lessonRepository.updateByStartDateStartTime(LocalDate.now(), LocalTime.now());
+        long now = System.currentTimeMillis();
+        lessonRepository.updateByStartDateStartTime(new Date(), new Time(now));
 
-        System.out.println(LocalTime.now());
+        System.out.println(new Time(now));
+    }
+
+    public void insertNewAvailableLesson(Lesson lesson) {
+        lessonRepository.save(lesson);
     }
 };
